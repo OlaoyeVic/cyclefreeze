@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import heroBg from "../assets/hero-bg.svg";
 import logo from "../assets/logo.svg";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Hero: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  
   return (
     <section 
       className="relative bg-cover bg-center w-full h-full overflow-hidden md:h-screen flex items-center justify-center text-center px-6" 
@@ -36,6 +39,42 @@ const Hero: React.FC = () => {
             <a href="https://www.cyclebreeze.com/publications" target="_blank" rel="noopener noreferrer">Publications</a>
           </li>
         </ul>
+        <div className="md:hidden z-50">
+          <button onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? (
+              <FaTimes className="text-black text-2xl" />
+            ) : (
+              <FaBars className="text-white text-2xl" />
+            )}
+          </button>
+        </div>
+        {/* Mobile Menu */}
+        <div
+          className={`fixed top-0 right-0 w-3/4 h-full bg-white/90 text-black flex flex-col items-start justify-center px-6 gap-6 transition-transform duration-300 ease-in-out z-40 ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          } md:hidden`}
+        >
+          {[
+            { name: "Home", link: "https://www.cyclebreeze.com/" },
+            { name: "About us", link: "https://www.cyclebreeze.com/about" },
+            { name: "Services", link: "https://www.cyclebreeze.com/services" },
+            { name: "Projects", link: "https://www.cyclebreeze.com/projects" },
+            { name: "Academy", link: "https://www.cyclebreeze.com/academy" },
+            { name: "Programs", link: "https://www.cyclebreeze.com/programs" },
+            { name: "Publications", link: "https://www.cyclebreeze.com/publications" },
+          ].map((item, index) => (
+            <a
+              key={index}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-green-500 text-lg"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
       </nav>
       <div className="relative z-10 max-w-3xl mt-[160px] md:mt-0 p-6">
         <h1 className="text-[56px] md:text-[72px] leading-[79.2px] md:text-6xl font-extrabold text-black">
