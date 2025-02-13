@@ -9,11 +9,11 @@ const Hero: React.FC = () => {
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       <div className="absolute inset-0 bg-black/40"></div>
-      <nav className="absolute top-6 left-4 md:left-16 right-16 flex justify-between items-center w-full">
+      <nav className="absolute top-6 px-4 flex justify-between items-center w-full">
         <div>
           <img src={logo} alt="CycleBreeze Logo" className="h-12" />
         </div>
-        <ul className="hidden md:flex gap-6 font-medium text-gray-700">
+        <ul className="hidden md:flex md:flex-row gap-6 font-medium text-white max-w-full">
           <li className="hover:text-green-500 cursor-pointer">
             <a href="https://www.cyclebreeze.com/" target="_blank" rel="noopener noreferrer">Home</a>
           </li>
@@ -25,6 +25,15 @@ const Hero: React.FC = () => {
           </li>
           <li className="hover:text-green-500 cursor-pointer">
             <a href="https://www.cyclebreeze.com/projects" target="_blank" rel="noopener noreferrer">Projects</a>
+          </li>
+          <li className="hover:text-green-500 cursor-pointer">
+            <a href="https://www.cyclebreeze.com/academy" target="_blank" rel="noopener noreferrer">Academy</a>
+          </li>
+          <li className="hover:text-green-500 cursor-pointer">
+            <a href="https://www.cyclebreeze.com/programs" target="_blank" rel="noopener noreferrer">Programs</a>
+          </li>
+          <li className="hover:text-green-500 cursor-pointer">
+            <a href="https://www.cyclebreeze.com/publications" target="_blank" rel="noopener noreferrer">Publications</a>
           </li>
         </ul>
       </nav>
