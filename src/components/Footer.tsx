@@ -9,10 +9,16 @@ const Footer = () => {
           <img src={whitelogo} alt="CycleBreeze Logo White" className="h-12" />
           <p className="mt-4 max-w-sm">A one-stop hub for solutions to your business needs and for research and technological development!</p>
           <div className="flex gap-4 mt-4">
-            <FaInstagram className="text-gray-400 text-xl hover:text-white" />
+            <a href="https://www.instagram.com/cyclebreeze_/" target="_blank" rel="noopener noreferrer">
+              <FaInstagram className="text-gray-400 text-xl hover:text-white" />
+            </a>
             <FaDribbble className="text-gray-400 text-xl hover:text-white" />
-            <FaTwitter className="text-gray-400 text-xl hover:text-white" />
-            <FaYoutube className="text-gray-400 text-xl hover:text-white" />
+            <a href="https://x.com/cyclebreeze_" target="_blank" rel="noopener noreferrer">
+              <FaTwitter className="text-gray-400 text-xl hover:text-white" />
+            </a>
+            <a href="https://www.youtube.com/@cyclebreeze6780" target="_blank" rel="noopener noreferrer">
+              <FaYoutube className="text-gray-400 text-xl hover:text-white" />
+            </a>
           </div>
         </div>
         <div className="mt-8 md:mt-0">

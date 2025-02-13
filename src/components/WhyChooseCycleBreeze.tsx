@@ -3,8 +3,8 @@ import gift from "../assets/gift.svg";
 
 const WhyChooseCyclebreeze = () => {
   return (
-    <section className="bg-white py-16 px-56">
-      <div className="bg-white p-16 shadow-lg rounded-lg flex flex-col md:flex-row justify-between items-center gap-10 relative">
+    <section className="bg-white py-16 px-16 md:px-56">
+      <div className="bg-white p-16 md:shadow-lg md:rounded-lg flex flex-col md:flex-row justify-between items-center gap-10 relative">
         <div>
           <h2 className="text-5xl font-extrabold mb-8">Why choose Cyclebreeze?</h2>
           <ul className="space-y-3 text-gray-700">

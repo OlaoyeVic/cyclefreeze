@@ -14,8 +14,8 @@ const CTA = () => {
   const closeSecondModal = () => setIsSecondModalOpen(false);
 
   return (
-    <section className="px-96 py-12 text-center">
-      <div className="bg-[#6FC446] rounded-[20px] p-8">
+    <section className="md:px-96 py-12 text-center">
+      <div className="bg-[#6FC446] md:rounded-[20px] p-8">
         <h2 className="text-2xl font-bold mb-4 text-white">READY TO GIVE THE ULTIMATE GIFT?</h2>
         <p className="mb-6 text-white">Invest in your loved one’s future—or your own—this Valentine’s. Let’s build something beautiful together!</p>
         <div className="flex flex-col md:flex-row justify-center gap-4">

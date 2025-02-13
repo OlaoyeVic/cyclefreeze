@@ -14,7 +14,7 @@ const HowItWorks = () => {
           <h3 className="font-normal text-[22px] leading-[22px]">Choose your package</h3>
           <p className="font-normal text-[16px] text-center mt-4">Select the perfect gift for your loved one—or yourself!</p>
 
-          <div className="absolute top-3/4 -translate-y-1/2 md:left-[80%] md:top-auto md:translate-y-0 flex items-center"> {/* Flexbox for circles and line */}
+          <div className="absolute top-3/4 -translate-y-1/2 md:left-[80%] md:top-auto md:translate-y-0 hidden md:flex items-center"> {/* Flexbox for circles and line */}
             <div className="w-6 h-6 rounded-full bg-[#FF69B4]"></div> {/* Start Circle */}
             <div className="md:w-24 w-0 h-0.5 bg-[#FF69B4] md:block hidden md:mx-2 md:border-t-2 md:border-[#FF69B4] md:border-style-dotted" style={{ borderStyle: 'dotted' }}></div> {/* Dotted Line with margin */}
             <div className="w-6 h-6 rounded-full bg-[#FF69B4]"></div> {/* End Circle */}
@@ -26,7 +26,7 @@ const HowItWorks = () => {
           </div>
           <h3 className="font-normal text-[22px] leading-[22px]">Receive your voucher</h3>
           <p className="font-normal text-[16px] text-center mt-4">After purchase, you’ll get a personalized voucher to present to your Valentine.</p>
-          <div className="absolute top-1/2 -translate-y-1/2 md:left-[80%] md:top-auto md:translate-y-0 flex items-center ">
+          <div className="absolute top-1/2 -translate-y-1/2 md:left-[80%] md:top-auto md:translate-y-0 hidden md:flex items-center ">
             <div className="w-6 h-6 rounded-full bg-[#FF69B4]"></div> {/* Start Circle */}
             <div className="md:w-24 w-0 h-0.5 bg-[#FF69B4] md:block hidden md:mx-2 md:border-t-2 md:border-[#FF69B4] md:border-style-dotted" style={{ borderStyle: 'dotted' }}></div> {/* Dotted Line with margin */}
             <div className="w-6 h-6 rounded-full bg-[#FF69B4]"></div> {/* End Circle */}
