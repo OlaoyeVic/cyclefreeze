@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { usePaystackPayment } from 'react-paystack';
 import { IoIosArrowForward } from 'react-icons/io';
 import RequestModal from './RequestModal';
 
 interface Plan {
   title: string;
   price: string;
+  amount: string,
   desc: string;
   features: string[];
   color: string; // Add a color property
@@ -21,6 +22,7 @@ const Pricing: React.FC = () => {
     {
       title: "THE BOSS LADY",
       price: "₦250,000",
+      amount: "250000",
       desc: "Perfect for entrepreneurs ready to launch their online presence.",
       features: [
         "Custom Website Design",
@@ -36,6 +38,7 @@ const Pricing: React.FC = () => {
     {
       title: "THE SOCIAL QUEEN",
       price: "₦150,000",
+      amount: "150000",
       desc: "Ideal for businesses looking to level up their brand identity and social presence.",
       features: [
         "Logo Design",
@@ -50,6 +53,7 @@ const Pricing: React.FC = () => {
     {
       title: "THE HUSTLER'S DEAL",
       price: "₦750,000",
+      amount: "750000",
       desc: "For businesses ready to take their products and services mobile.",
       features: [
         "User-Friendly App Interface Design",
@@ -65,6 +69,7 @@ const Pricing: React.FC = () => {
     {
       title: "CONTENT CREATOR's DREAM",
       price: "₦250,000",
+      amount: "250000",
       desc: "Perfect for influencers, content creators, and brands looking to boost their online presence",
       features: [
         "3 Video Ads for Social Media & Web",
@@ -80,6 +85,7 @@ const Pricing: React.FC = () => {
     {
       title: "THE CEO VIBES",
       price: "₦400,000",
+      amount: "400000",
       desc: "For business leaders who want a powerful online presence with strong branding",
       features: [
         "Custom Website Design",
@@ -95,6 +101,7 @@ const Pricing: React.FC = () => {
     {
       title: "THE BRAND EMPEROR",
       price: "₦350,000",
+      amount: "350000",
       desc: "For businesses that want it all—a complete digital and branding presence with content to match.",
       features: [
         "Logo, Brand Guide & Identity Design",
@@ -137,36 +144,58 @@ const Pricing: React.FC = () => {
   //       setIsSubmitting(false);
   //     });
   // };
+  const config = {
+    reference: new Date().getTime().toString(),
+    email: "", // Will be set dynamically
+    amount: Number(selectedPlan?.amount || 0) * 100,
+    publicKey: "pk_test_99da37a4cff9144f80c4d51aac3cc6d55d4ecf12",
+    metadata: {
+      package: [
+          {
+            fullname: '',
+            email: '',
+            phonenumber: '',
+            voucherName: selectedPlan?.title,
+            amount: selectedPlan?.price,
+            subject: '',
+            message: ''
+          }
+          // To pass extra metadata, add an object with the same fields as above
+      ]
+  }
+  };
+
+  const initializePayment = usePaystackPayment(config);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!selectedPlan) return;
-  
+
     setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
-  
-    const emailParams = {
-      to_name: formData.get("name") as string,
-      from_name: "CycleBreeze",
-      message: `You have selected the ${selectedPlan.title} plan at ${selectedPlan.price}.`,
-      plan_title: selectedPlan.title,
-      plan_price: selectedPlan.price,
-      email: formData.get("email") as string,
-    };
-  
-    emailjs.send('service_l8bmfs8', 'template_hnpiu31', emailParams, 'Dpb-hMQBC7s3a_rEP')
-      .then(() => {
-        event.currentTarget.reset();
+    config.email = formData.get("email") as string; // Update email dynamically
+    config.metadata.package[0].fullname = formData.get("fullname") as string;
+    config.metadata.package[0].email = formData.get("email") as string;
+    config.metadata.package[0].phonenumber = formData.get("phonenumber") as string;
+    config.metadata.package[0].subject = formData.get("subject") as string;
+    config.metadata.package[0].message = formData.get("message") as string;
+    initializePayment({ onSuccess, onClose });
+  };
+ 
+ // you can call this function anything
+ const onSuccess = (reference) => {
+  // Implementation for whatever you want to do with reference and after success call.
+  console.log(reference);
+
         closeModal();
         setIsSuccessModalOpen(true);
-      })
-      .catch(() => {
-        alert("An error occurred. Please try again later.");
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
-  };
-  
+};
+
+// you can call this function anything
+const onClose = () => {
+  // implementation for  whatever you want to do when the Paystack dialog closed.
+  console.log('closed')
+}
 
 
   const CheckIcon = ({ className }: { className?: string }) => (
@@ -225,6 +254,7 @@ const Pricing: React.FC = () => {
                 </ul>
 
                 <div className="text-center absolute bottom-8 left-1/2 -translate-x-1/2 w-[80%]">
+
                   <button
                     className={`hover:bg-[${plan.color}-600] font-bold py-3 px-6 w-full`}
                     style={{
@@ -233,7 +263,7 @@ const Pricing: React.FC = () => {
                       border: `1px solid ${plan.color}`,
                       borderRadius: '50px',
                     }}
-                    onClick={() => handleSelectPlan(plan)} 
+                    onClick={() => handleSelectPlan(plan)}
                   >
                     Select this plan
                   </button>
@@ -259,20 +289,21 @@ const Pricing: React.FC = () => {
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-8 mb-8">  {/* Two-column grid */}
                 <div>
-                  <label htmlFor="firstName" className="block text-left text-gray-700 font-medium mb-2">First Name</label>
+                  <label htmlFor="firstName" className="block text-left text-gray-700 font-medium mb-2">Fullname</label>
                   <input 
                     type="text" 
                     id="firstName" 
-                    name="name"
+                    name="fullname"
                     className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     required
                   />
                 </div>
                 <div>
-                  <label htmlFor="surname" className="block text-left text-gray-700 font-medium mb-2">Surname</label>
+                  <label htmlFor="phonenumber" className="block text-left text-gray-700 font-medium mb-2">Phone Number</label>
                   <input 
                     type="text" 
-                    id="surname" 
+                    id="phonenumber" 
+                    name="phonenumber" 
                     className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
                     required
                   />
@@ -285,8 +316,10 @@ const Pricing: React.FC = () => {
                   <input 
                     type="text" 
                     id="voucherName" 
+                    name='voucherName'
+                    value={selectedPlan.title }
                     className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    required
+                    required readOnly
                   />
                 </div>
                 <div>
@@ -299,8 +332,24 @@ const Pricing: React.FC = () => {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="subject" className="block text-left text-gray-700 font-medium mb-2">Enter Any special note to recipient (30 words max)</label>
+                  <textarea 
+                    id="subject" 
+                    name='subject' className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required></textarea>
+                  
+                </div>
+                 <div>
+                  <label htmlFor="message" className="block text-left text-gray-700 font-medium mb-2">Enter Any other information you would like us to know</label>
+                  <textarea 
+                    id="message" 
+                    name='message' className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required></textarea>
+                  
+                </div>
               </div>
-
+             
               <button 
                 type="submit" 
                 className="bg-[#6FC446] hover:bg-#6FC446-600 text-white font-medium py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-#6FC446-300 flex items-center justify-center whitespace-nowrap"
