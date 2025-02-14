@@ -150,15 +150,20 @@ const Pricing: React.FC = () => {
     amount: Number(selectedPlan?.amount || 0) * 100,
     publicKey: "pk_test_99da37a4cff9144f80c4d51aac3cc6d55d4ecf12",
     metadata: {
-      package: [
+      custom_fields: [
           {
             fullname: '',
             email: '',
             phonenumber: '',
-            voucherName: selectedPlan?.title,
-            amount: selectedPlan?.price,
+            voucherName: selectedPlan?.title||'',
+            amount: selectedPlan?.price||'',
             subject: '',
-            message: ''
+            message: '',
+            recipientsFirstName: '',
+            recipientsLastName: '',
+            recipientsEmail: '',
+            recipientsPhone: '',
+            recipientsnickName: '',
           }
           // To pass extra metadata, add an object with the same fields as above
       ]
@@ -174,16 +179,21 @@ const Pricing: React.FC = () => {
     setIsSubmitting(true);
     const formData = new FormData(event.currentTarget);
     config.email = formData.get("email") as string; // Update email dynamically
-    config.metadata.package[0].fullname = formData.get("fullname") as string;
-    config.metadata.package[0].email = formData.get("email") as string;
-    config.metadata.package[0].phonenumber = formData.get("phonenumber") as string;
-    config.metadata.package[0].subject = formData.get("subject") as string;
-    config.metadata.package[0].message = formData.get("message") as string;
+    config.metadata.custom_fields[0].fullname = formData.get("fullname") as string;
+    config.metadata.custom_fields[0].email = formData.get("email") as string;
+    config.metadata.custom_fields[0].phonenumber = formData.get("phonenumber") as string;
+    config.metadata.custom_fields[0].subject = formData.get("subject") as string;
+    config.metadata.custom_fields[0].message = formData.get("message") as string;
+    config.metadata.custom_fields[0].recipientsFirstName = formData.get("recipientsFirstName") as string;
+    config.metadata.custom_fields[0].recipientsLastName = formData.get("recipientsLastName") as string;
+    config.metadata.custom_fields[0].recipientsEmail = formData.get("recipientsEmail") as string;
+    config.metadata.custom_fields[0].recipientsPhone = formData.get("recipientsPhone") as string;
+    config.metadata.custom_fields[0].recipientsnickName = formData.get("recipientsnickName") as string;
     initializePayment({ onSuccess, onClose });
   };
  
  // you can call this function anything
- const onSuccess = (reference) => {
+ const onSuccess = (reference: any) => {
   // Implementation for whatever you want to do with reference and after success call.
   console.log(reference);
 
@@ -277,7 +287,7 @@ const onClose = () => {
 
       {isModalOpen && selectedPlan && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-          <div className="bg-white rounded-lg p-8 w-[70%] relative">
+          <div className="bg-white rounded-lg p-8 w-full lg:w-[70%] max-h-[100vh] relative overflow-hidden flex flex-col">
           <button className="absolute top-4 right-4 text-gray-500 hover:text-gray-700" onClick={closeModal}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -285,11 +295,11 @@ const onClose = () => {
           </button>
             <h2 className="text-2xl font-semibold mb-4">{selectedPlan.title}</h2>
             <p className="text-gray-600 mb-6">Price: {selectedPlan.price}</p>
-
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-2 gap-8 mb-8">  {/* Two-column grid */}
+<div className=' overflow-y-auto flex-1'>
+<form onSubmit={handleSubmit}>
+              <div className="grid grid-col-1 lg:grid-cols-2 gap-8 mb-8">  {/* Two-column grid */}
                 <div>
-                  <label htmlFor="firstName" className="block text-left text-gray-700 font-medium mb-2">Fullname</label>
+                  <label htmlFor="firstName" className="block text-left text-gray-700 font-medium mb-2">Sender Fullname</label>
                   <input 
                     type="text" 
                     id="firstName" 
@@ -299,7 +309,7 @@ const onClose = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="phonenumber" className="block text-left text-gray-700 font-medium mb-2">Phone Number</label>
+                  <label htmlFor="phonenumber" className="block text-left text-gray-700 font-medium mb-2">Sender Phone Number</label>
                   <input 
                     type="text" 
                     id="phonenumber" 
@@ -308,9 +318,30 @@ const onClose = () => {
                     required
                   />
                 </div>
+                <div>
+                  <label htmlFor="phonenumber" className="block text-left text-gray-700 font-medium mb-2">Any Nick Name</label>
+                  <input 
+                    type="text" 
+                    id="phonenumber" 
+                    name="phonenumber" 
+                    placeholder='Any Nick Name your Val Know you As'
+                    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="block text-left text-gray-700 font-medium mb-2">Email Address</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name='email'
+                    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required
+                  />
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-4"> {/* Two-column grid */}
+              <div className="grid grid-col-1 lg:grid-cols-2 gap-4 mb-4"> 
                 <div>
                   <label htmlFor="voucherName" className="block text-left text-gray-700 font-medium mb-2">Name your voucher</label>
                   <input 
@@ -323,13 +354,54 @@ const onClose = () => {
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block text-left text-gray-700 font-medium mb-2">Email Address</label>
+                  <label htmlFor="amount" className="block text-left text-gray-700 font-medium mb-2">Recipients First name</label>
                   <input 
-                    type="email" 
-                    id="email" 
-                    name='email'
+                    type="text" 
+                    id="amount" 
+                    name='recipientsFirstName'
                     className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    required
+                    required readOnly
+                  />
+                </div>
+                <div>
+                  <label htmlFor="amount" className="block text-left text-gray-700 font-medium mb-2">Recipients Last name</label>
+                  <input 
+                    type="text" 
+                    id="amount" 
+                    name='recipientsLastName'
+                    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required readOnly
+                  />
+                </div>
+                <div>
+                  <label htmlFor="amount" className="block text-left text-gray-700 font-medium mb-2">Recipient Email address</label>
+                  <input 
+                    type="text" 
+                    id="amount" 
+                    name='recipientsEmail'
+                    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required readOnly
+                  />
+
+                </div>
+                <div>
+                  <label htmlFor="amount" className="block text-left text-gray-700 font-medium mb-2">Recipients Phone number</label>
+                  <input 
+                    type="text" 
+                    id="amount" 
+                    name='recipientsPhone'
+                    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required readOnly
+                  />
+                </div>
+                <div>
+                  <label htmlFor="amount" className="block text-left text-gray-700 font-medium mb-2">Recipient Nick Name</label>
+                  <input 
+                    type="text" 
+                    id="amount" 
+                    name='recipientsnickName'
+                    className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    required readOnly
                   />
                 </div>
                 <div>
@@ -349,14 +421,15 @@ const onClose = () => {
                   
                 </div>
               </div>
-             
               <button 
                 type="submit" 
-                className="bg-[#6FC446] hover:bg-#6FC446-600 text-white font-medium py-2 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-#6FC446-300 flex items-center justify-center whitespace-nowrap"
+                className="bg-[#6FC446] hover:bg-#6FC446-600 text-white font-medium py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-#6FC446-300 flex items-center justify-center whitespace-nowrap"
               >
                 {isSubmitting ? "Submitting" : <>Submit <IoIosArrowForward color="white" style={{marginLeft: '4px'}} /></>}
               </button>
             </form>
+</div>
+            
           </div>
         </div>
       )}
