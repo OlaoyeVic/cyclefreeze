@@ -16,33 +16,38 @@ const CTA = () => {
   return (
     <section className="md:px-96 py-12 text-center">
       <div className="bg-[#6FC446] md:rounded-[20px] p-8">
-        <h2 className="text-2xl font-bold mb-4 text-white">READY TO GIVE THE ULTIMATE GIFT?</h2>
-        <p className="mb-6 text-white">Invest in your loved one’s future—or your own—this Valentine’s. Let’s build something beautiful together!</p>
+        <h2 className="text-2xl font-bold mb-4 text-white">
+          READY TO GIVE THE ULTIMATE GIFT?
+        </h2>
+        <p className="mb-6 text-white">
+          Invest in your loved one’s future—or your own—this Valentine’s. Let’s
+          build something beautiful together!
+        </p>
         <div className="flex flex-col md:flex-row justify-center gap-4">
-          <button 
+          <button
             className="px-6 py-3 text-white rounded-lg font-normal  hover:bg-[#FFFFFF] hover:text-white flex items-center justify-center"
             style={{
-              color: '#FFFFFF',
-              backgroundColor: '#6FC446',
+              color: "#FFFFFF",
+              backgroundColor: "#6FC446",
               border: `4px solid #FFFFFF`,
-              borderRadius: '32px',
-              whiteSpace: 'nowrap',
+              borderRadius: "32px",
+              whiteSpace: "nowrap",
             }}
-            onClick={openSecondModal}
+            onClick={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
           >
-            Claim Your Valentine’s Package Now! <IoIosArrowForward color="black" style={{marginLeft: '4px'}} />
+            Claim Your Valentine’s Package Now!{" "}
+            <IoIosArrowForward color="black" style={{ marginLeft: "4px" }} />
           </button>
-          <button 
+          <button
             className="px-6 py-3 bg-white text-black rounded-[32px] font-normal flex items-center justify-center whitespace-nowrap"
             onClick={openModal}
           >
-            Request a Custom Quote <IoIosArrowForward color="black" style={{marginLeft: '4px'}} />
+            Request a Custom Quote{" "}
+            <IoIosArrowForward color="black" style={{ marginLeft: "4px" }} />
           </button>
         </div>
       </div>
-      {isModalOpen && (
-        <CustomQuoteForm closeModal={closeModal} />
-      )}
+      {isModalOpen && <CustomQuoteForm closeModal={closeModal} />}
       {isSecondModalOpen && (
         <RequestModal closeSecondModal={closeSecondModal} />
       )}

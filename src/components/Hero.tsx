@@ -5,10 +5,10 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 const Hero: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   return (
-    <section 
-      className="relative bg-cover bg-center w-full h-full overflow-hidden md:h-screen flex items-center justify-center text-center px-6" 
+    <section
+      className="relative bg-cover bg-center w-full h-full overflow-hidden md:h-screen flex items-center justify-center text-center px-6"
       style={{ backgroundImage: `url(${heroBg})` }}
     >
       <div className="absolute inset-0 bg-black/40"></div>
@@ -18,25 +18,67 @@ const Hero: React.FC = () => {
         </div>
         <ul className="hidden md:flex md:flex-row gap-6 font-medium text-white max-w-full">
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/" target="_blank" rel="noopener noreferrer">Home</a>
+            <a
+              href="https://www.cyclebreeze.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Home
+            </a>
           </li>
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/about" target="_blank" rel="noopener noreferrer">About us</a>
+            <a
+              href="https://www.cyclebreeze.com/about"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              About us
+            </a>
           </li>
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/services" target="_blank" rel="noopener noreferrer">Services</a>
+            <a
+              href="https://www.cyclebreeze.com/services"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Services
+            </a>
           </li>
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/projects" target="_blank" rel="noopener noreferrer">Projects</a>
+            <a
+              href="https://www.cyclebreeze.com/projects"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Projects
+            </a>
           </li>
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/academy" target="_blank" rel="noopener noreferrer">Academy</a>
+            <a
+              href="https://www.cyclebreeze.com/academy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Academy
+            </a>
           </li>
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/programs" target="_blank" rel="noopener noreferrer">Programs</a>
+            <a
+              href="https://www.cyclebreeze.com/programs"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Programs
+            </a>
           </li>
           <li className="hover:text-green-500 cursor-pointer">
-            <a href="https://www.cyclebreeze.com/publications" target="_blank" rel="noopener noreferrer">Publications</a>
+            <a
+              href="https://www.cyclebreeze.com/publications"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Publications
+            </a>
           </li>
         </ul>
         <div className="md:hidden z-50">
@@ -61,7 +103,10 @@ const Hero: React.FC = () => {
             { name: "Projects", link: "https://www.cyclebreeze.com/projects" },
             { name: "Academy", link: "https://www.cyclebreeze.com/academy" },
             { name: "Programs", link: "https://www.cyclebreeze.com/programs" },
-            { name: "Publications", link: "https://www.cyclebreeze.com/publications" },
+            {
+              name: "Publications",
+              link: "https://www.cyclebreeze.com/publications",
+            },
           ].map((item, index) => (
             <a
               key={index}
@@ -81,18 +126,21 @@ const Hero: React.FC = () => {
           Cyclebreeze Valentine’s Tech Love Deals!
         </h1>
         <p className="text-black mt-4 text-[12px] md:text-[18px] leading-[28.8px] font-normal">
-          This Valentine’s, skip the chocolates and flowers—give the gift that keeps giving. 
-          Whether it's for your partner, friend, or yourself, our exclusive tech packages are designed to launch dreams, elevate brands, and create lasting success. 
-          Plus, with up to 70% OFF for Valentine’s, there’s never been a better time to invest in the future.
+          This Valentine’s, skip the chocolates and flowers—give the gift that
+          keeps giving. Whether it's for your partner, friend, or yourself, our
+          exclusive tech packages are designed to launch dreams, elevate brands,
+          and create lasting success. Plus, with up to 70% OFF for Valentine’s,
+          there’s never been a better time to invest in the future.
         </p>
-        <button 
+        <button
           className="mt-6 hover:bg-[#6FC446-600] text-white py-3 px-6 rounded-lg text-lg font-medium hover:bg-green-600 transition"
           style={{
-            color: '#6FC446',
+            color: "#6FC446",
             // backgroundColor: '#6FC446',
             border: `1px solid #6FC446`,
-            borderRadius: '8px',
+            borderRadius: "8px",
           }}
+          onClick={() => window.scrollTo({ top: 1000, behavior: "smooth" })}
         >
           Claim your package
         </button>
