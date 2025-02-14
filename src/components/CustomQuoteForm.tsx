@@ -206,7 +206,7 @@ const CustomQuoteForm = ({ closeModal }: CustomQuoteFormProps) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-      <div className="bg-white rounded-lg p-8 w-[70%] relative">
+      <div className="bg-white rounded-lg p-8 lg:w-[70%] max-h-[100vh] relative overflow-hidden flex flex-col">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
           onClick={closeModal}
@@ -231,218 +231,212 @@ const CustomQuoteForm = ({ closeModal }: CustomQuoteFormProps) => {
         <p className="text-gray-600 mb-6">
           Fill the below form so as to send you your desired package.
         </p>
-
-        <form onSubmit={handleSubmit}>
-          <div className="grid grid-col-1 lg:grid-cols-2 gap-8 mb-8">
-            {" "}
-            {/* Two-column grid */}
-            <div>
-              <label
-                htmlFor="firstName"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Sender Fullname
-              </label>
-              <input
-                type="text"
-                id="firstName"
-                name="fullname"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="phonenumber"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Sender Phone Number
-              </label>
-              <input
-                type="text"
-                id="phonenumber"
-                name="phonenumber"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="phonenumber"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Any Nick Name
-              </label>
-              <input
-                type="text"
-                id="phonenumber"
-                name="phonenumber"
-                placeholder="Any Nick Name your Val Know you As"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-col-1 lg:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label
-                htmlFor="voucherName"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Name your voucher
-              </label>
-              {/* <input 
-                                type="text" 
-                                id="voucherName" 
-                                name='voucherName'
-                                value={selectedPlan.title }
-                                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                                required readOnly
-                              /> */}
-              <select
-                onChange={handleSelectChange}
-                className="border p-2 rounded-md w-full"
-              >
-                <option value="">-- Choose a Plan --</option>
-                {plans.map((plan) => (
-                  <option key={plan.title} value={plan.title}>
-                    {plan.title} - {plan.price}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label
-                htmlFor="amount"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Recipients First name
-              </label>
-              <input
-                type="text"
-                id="amount"
-                name="recipientsFirstName"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="amount"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Recipients Last name
-              </label>
-              <input
-                type="text"
-                id="amount"
-                name="recipientsLastName"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="amount"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Recipient Email address
-              </label>
-              <input
-                type="text"
-                id="amount"
-                name="recipientsEmail"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="amount"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Recipients Phone number
-              </label>
-              <input
-                type="text"
-                id="amount"
-                name="recipientsPhone"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="amount"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Recipient Nick Name
-              </label>
-              <input
-                type="text"
-                id="amount"
-                name="recipientsnickName"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="subject"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Enter Any special note to recipient (30 words max)
-              </label>
-              <textarea
-                id="subject"
-                name="subject"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              ></textarea>
-            </div>
-            <div>
-              <label
-                htmlFor="message"
-                className="block text-left text-gray-700 font-medium mb-2"
-              >
-                Enter Any other information you would like us to know
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-                required
-              ></textarea>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="bg-[#6FC446] hover:bg-#6FC446-600 text-white font-medium py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-#6FC446-300 flex items-center justify-center whitespace-nowrap"
-          >
-            {isSubmitting ? (
-              "Submitting"
-            ) : (
-              <>
-                Submit{" "}
-                <IoIosArrowForward
-                  color="white"
-                  style={{ marginLeft: "4px" }}
+        <div className=" overflow-y-auto flex-1">
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-col-1 lg:grid-cols-2 gap-8 mb-8">
+              {" "}
+              {/* Two-column grid */}
+              <div>
+                <label
+                  htmlFor="firstName"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Sender Fullname
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="fullname"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
                 />
-              </>
-            )}
-          </button>
-        </form>
+              </div>
+              <div>
+                <label
+                  htmlFor="phonenumber"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Sender Phone Number
+                </label>
+                <input
+                  type="text"
+                  id="phonenumber"
+                  name="phonenumber"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="phonenumber"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Sender Nickname
+                </label>
+                <input
+                  type="text"
+                  id="phonenumber"
+                  name="phonenumber"
+                  placeholder="Type Any Nickname your Val Know you As"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-col-1 lg:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label
+                  htmlFor="voucherName"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Name your voucher
+                </label>
+
+                <select
+                  onChange={handleSelectChange}
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">-- Choose a Plan --</option>
+                  {plans.map((plan) => (
+                    <option key={plan.title} value={plan.title}>
+                      {plan.title} - {plan.price}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label
+                  htmlFor="amount"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Recipients Firstname
+                </label>
+                <input
+                  type="text"
+                  id="amount"
+                  name="recipientsFirstName"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="amount"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Recipients Lastname
+                </label>
+                <input
+                  type="text"
+                  id="amount"
+                  name="recipientsLastName"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="amount"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Recipient Email address
+                </label>
+                <input
+                  type="text"
+                  id="amount"
+                  name="recipientsEmail"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="amount"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Recipients Phone number
+                </label>
+                <input
+                  type="text"
+                  id="amount"
+                  name="recipientsPhone"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="amount"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Recipient Nickname
+                </label>
+                <input
+                  type="text"
+                  id="amount"
+                  name="recipientsnickName"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="subject"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Enter Any special note to recipient (30 words max)
+                </label>
+                <textarea
+                  id="subject"
+                  name="subject"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-left text-gray-700 font-medium mb-2"
+                >
+                  Enter Any other information you would like us to know
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="bg-[#6FC446] hover:bg-#6FC446-600 text-white font-medium py-3 px-6 rounded-md focus:outline-none focus:ring-2 focus:ring-#6FC446-300 flex items-center justify-center whitespace-nowrap"
+            >
+              {isSubmitting ? (
+                "Submitting"
+              ) : (
+                <>
+                  Submit{" "}
+                  <IoIosArrowForward
+                    color="white"
+                    style={{ marginLeft: "4px" }}
+                  />
+                </>
+              )}
+            </button>
+          </form>
+        </div>
       </div>
 
       {isSuccessModalOpen && (
