@@ -148,7 +148,7 @@ const Pricing: React.FC = () => {
     reference: new Date().getTime().toString(),
     email: "", // Will be set dynamically
     amount: Number(selectedPlan?.amount || 0) * 100,
-    publicKey: "pk_test_99da37a4cff9144f80c4d51aac3cc6d55d4ecf12",
+    publicKey: "pk_live_24d621bf7507b757f14074cf356b682dba0b33d2",
     metadata: {
       custom_fields: [
         {
